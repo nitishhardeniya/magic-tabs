@@ -1,0 +1,33 @@
+.magic-tabs {
+    display: flex;
+    max-width: 100%;
+}
+
+.mg-tabitem {
+    display: inline-flex;
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    color: grey;
+    cursor: pointer;
+}
+
+.active {
+    font-weight: 500;
+    border-bottom: 2px solid #34cceb;
+}
+
+.mg-label {
+    padding-right: 10px;
+}
+
+.close {
+    height: 16px;
+    width: 16px;
+}
+
+.main-content {
+    width: 100%;
+    min-height: 400px;
+    padding: 24px;
+    border: 1px solid lightgrey;
+}
