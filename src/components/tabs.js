@@ -16,7 +16,7 @@ class Tabs extends Component {
     }
 
     render() {
-        const { children } = this.props;
+        const { children, allowAdd, onNewTab } = this.props;
         return (
             <div className="magic-tabs">
                 {React.Children.map(children, (child, index) => {
@@ -26,9 +26,16 @@ class Tabs extends Component {
                         tabIndex: index
                     }, null);
                 })}
+                {allowAdd && <div className="add" onClick={e => onNewTab(e)}>+</div>}
             </div>
         )
     }
 }
 
 export default Tabs;
+
+Tabs.PropTypes = {
+    maxTabs: PropTypes.number,
+    allowAdd: PropTypes.bool,
+    onNewTab: PropTypes.func
+}

@@ -16,6 +16,22 @@ const alltabs = [
   {
     name: "Typography",
     closable: false,
+  },
+  {
+    name: "Installation",
+    closable: false,
+  },
+  {
+    name: "Item 5",
+    closable: false,
+  },
+  {
+    name: "Item 6",
+    closable: true,
+  },
+  {
+    name: "Item 7",
+    closable: false,
   }
 ]
 
@@ -29,7 +45,7 @@ class App extends React.Component {
   }
 
   _onTabChange = (tabIndex) => {
-    console.log("Im clicked", tabIndex);
+    // console.log("Im clicked", tabIndex);
     this.setState({
       activeTab: tabIndex
     })
@@ -37,12 +53,20 @@ class App extends React.Component {
   
   _onTabClose = (e, index) => {
     e.stopPropagation();
-    console.log("Tab closed",index ,e);
+    // console.log("Tab closed",index ,e);
     const nextTabs = [...this.state.tabsConfig].filter((tab,it) => it !== index);
     this.setState({
       tabsConfig: nextTabs
     })
-    
+  }
+
+  _onNewTab = (e) => {
+    const { tabsConfig } = this.state;
+    e.stopPropagation();
+    tabsConfig.push({ name: `Item ${tabsConfig.length+1}`, closable: false });
+    this.setState({
+      tabsConfig
+    })
   }
 
   render() {
@@ -50,8 +74,8 @@ class App extends React.Component {
     return (<div className="demo-container">
       <div className="title">Demo Magic Tabs</div>
       
-      <Tabs onTabChange={this._onTabChange}>
-        {tabsConfig.map(tab => <Tabitem label={tab.name} closable={tab.closable} active={tab.active} onTabClose={this._onTabClose}></Tabitem>)}
+      <Tabs onTabChange={this._onTabChange} allowAdd maxTabs={10} onNewTab={this._onNewTab}>
+        {tabsConfig.map(tab => <Tabitem label={tab.name} closable={tab.closable} onTabClose={this._onTabClose}></Tabitem>)}
       </Tabs>
 
       <div className="main-content">
